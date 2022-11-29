@@ -1,14 +1,24 @@
+function gen_color() {
+  do {
+    r=int(rand()*256)
+    g=int(rand()*256)
+    b=int(rand()*256)
+  } while ((r + g + b) < 256)
+}
+
 BEGIN {
   srand(rseed)
   FPAT="([0-9a-zA-Z]+|[^0-9a-zA-Z]+)"
   FSEP=""
-  n=int(rand() * 6)
+  gen_color()
 }
+
 {
   for (i = 1; i <= NF; i++) {
     if (i % 2 == 1) {
-      printf "\033[%d;1m", (n + 31)
-      n=(n + int(1 + rand() * 5)) % 6
+      if (DEBUG) printf "%d;%d;%d", r, g, b
+      printf "\033[38;2;%d;%d;%dm", r, g, b
+      gen_color()
     }
     printf "%s\033[0;1m", $i
   }
