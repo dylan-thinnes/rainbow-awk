@@ -1,0 +1,1 @@
+awk -v rseed=$RANDOM -f rainbow.awk
