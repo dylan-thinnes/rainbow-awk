@@ -15,7 +15,7 @@ BEGIN {
 
 {
   for (i = 1; i <= NF; i++) {
-    if (i % 2 == 1) {
+    if ($i ~ /[0-9a-zA-Z]/) {
       if (DEBUG) printf "%d;%d;%d", r, g, b
       printf "\033[38;2;%d;%d;%dm", r, g, b
       gen_color()
